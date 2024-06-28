@@ -8,6 +8,7 @@ const BoxShadow shadow = BoxShadow(
 );
 
 const Color appColor = Color(0xFFFC8E51);
+const Color appColor1 = Color(0xFFEE6913);
 const Color appOrangeColor = Color(0xFFFB473E);
 const Color appyellowColor = Color(0xFFEEB61B);
 const Color appLightGreenColor = Color(0xFF51C79D);
@@ -20,6 +21,7 @@ const Color greyColor = Colors.grey;
 const Color blackColor = Colors.black;
 
 const Color appRedColor = Colors.red;
+const Color appRedColor1 = Color(0xffEF3349);
 
 const Color appContainerBackColor = Color(0xFFEEF2F7);
 const Color appOrangeLightColor = Color(0xFFFBF2E4);
@@ -42,5 +44,9 @@ const Gradient appGradient3 = LinearGradient(
 const Gradient appGradient4 = LinearGradient(
   colors: [Color(0xff8656EC), Color(0xff425EC1)],
   begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);const Gradient appGradient5 = LinearGradient(
+  colors: [Color(0xffFFCF25), Color(0xffFD8C43)],
+  begin: Alignment.topRight,
   end: Alignment.bottomRight,
 );

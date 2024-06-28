@@ -13,6 +13,8 @@ class SpellingGridController extends GetxController {
   String text = "";
   int index = 0;
   final String fullText = '''Hello,let's have a\nquick spelling session!''';
+  bool isNumberPuzzleRobotShown = false;
+  final box = GetStorage();
 
   void startTyping() {
     const duration = const Duration(milliseconds: 100);
@@ -32,6 +34,8 @@ class SpellingGridController extends GetxController {
   void onInit() {
     AvtarName = userData.read(userName);
     startTyping();
+    box.initStorage;
+    isNumberPuzzleRobotShown = box.read('isSpellingGameRobotShown') ?? false;
     super.onInit();
   }
 

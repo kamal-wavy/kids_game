@@ -2,6 +2,7 @@ import 'package:KidsPlan/custom/simpleText.dart';
 import 'package:KidsPlan/image.dart';
 import 'package:KidsPlan/pages/initial/view/select_game_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../app_argument.dart';
@@ -97,7 +98,7 @@ class SelectAvtarScreen extends GetView<SelectAvtarController> {
                                       Image.asset(appCircle),
                                       Image.asset(
                                         controller.avatars[index],
-                                        height: 80,
+                                        height: 60,
                                         fit: BoxFit.fill,
                                       ),
                                     ],
@@ -111,15 +112,30 @@ class SelectAvtarScreen extends GetView<SelectAvtarController> {
                           Padding(
                             padding:
                                 const EdgeInsets.only(left: 50.0, right: 50),
-                            child: new TextFormField(
+                            child: TextFormField(
                               controller: controller.textFieldController,
-                              decoration: new InputDecoration(
+                              decoration: InputDecoration(
                                 labelText: "Your Name",
                                 fillColor: Colors.white,
-                                border: new OutlineInputBorder(
-                                  borderRadius: new BorderRadius.circular(25.0),
-                                  borderSide: new BorderSide(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide:
+                                      BorderSide(color: appColor, width: 2),
                                 ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide:
+                                      BorderSide(color: appColor, width: 2),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide:
+                                      BorderSide(color: appColor, width: 2),
+                                ),
+                                // border: OutlineInputBorder(
+                                //   borderRadius: BorderRadius.circular(25.0),
+                                //   borderSide: BorderSide(),
+                                // ),
                                 //fillColor: Colors.green
                               ),
                               validator: (value) {
@@ -128,8 +144,14 @@ class SelectAvtarScreen extends GetView<SelectAvtarController> {
                                 }
                                 return null;
                               },
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    controller.alphanumericRegex),
+                                FilteringTextInputFormatter.deny(
+                                    RegExp("[0-9]")),
+                              ],
                               keyboardType: TextInputType.emailAddress,
-                              style: new TextStyle(
+                              style: TextStyle(
                                 fontFamily: "Poppins",
                               ),
                             ),
@@ -144,14 +166,14 @@ class SelectAvtarScreen extends GetView<SelectAvtarController> {
                                       false) {
                                     if (controller.selectedAvatar.value == '') {
                                       Get.snackbar(
-                                        icon: Icon(Icons
-                                            .notification_important_outlined),
+                                        // icon: Icon(Icons
+                                        //     .notification_important_outlined),
                                         backgroundColor: appColor,
-                                        'Warning',
+                                        'Hey, User!',
                                         '',
                                         messageText: CustomSimpleTextField(
                                           textSizeValue: true,
-                                          hintText: 'Please select avtar',
+                                          hintText: 'Kindly choose an avatar.',
                                           textSize: 18,
                                           hintColor: blackColor,
                                           fontfamily: 'Monstreat',

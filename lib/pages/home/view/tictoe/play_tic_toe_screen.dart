@@ -131,58 +131,62 @@ _bodyWidget(PlayTicToeController controller) {
                         children: [
                           Expanded(
                             flex: 3,
-                            child: Container(
-                                height: 100,
+                            child: SizedBox(
                                 child: Stack(
-                                  alignment: Alignment.bottomCenter,
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: appColor,
-                                      radius: 60,
-                                      child: Image.asset(
-                                          controller
-                                                  .selectedItem1?.imageAsset ??
-                                              '',
-                                          width: 70,
-                                          height: 70),
-                                    ),
-                                    Positioned(
-                                      bottom: 2, // Use bottom instead of top
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15.0, right: 15),
-                                          child: Center(
-                                            child: CustomSimpleTextField(
-                                              textSizeValue: true,
-                                              hintText: controller
-                                                      .selectedItem1?.text ??
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: appColor,
+                                  radius:
+                                      MediaQuery.of(Get.context!).size.height *
+                                          0.06,
+                                  child: Image.asset(
+                                      controller.selectedItem1?.imageAsset ??
+                                          '',
+                                      height: MediaQuery.of(Get.context!)
+                                              .size
+                                              .height *
+                                          0.06),
+                                ),
+                                Positioned(
+                                  bottom: 0, // Use bottom instead of top
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, right: 15),
+                                      child: Center(
+                                        child: CustomSimpleTextField(
+                                          textSizeValue: true,
+                                          hintText:
+                                              controller.selectedItem1?.text ??
                                                   "",
-                                              textSize: 20,
-                                              hintColor: Colors.white,
-                                              fontfamily: 'summary',
-                                            ),
-                                          ),
+                                          textSize: 20,
+                                          hintColor: Colors.white,
+                                          fontfamily: 'summary',
                                         ),
                                       ),
                                     ),
-                                  ],
-                                )),
+                                  ),
+                                ),
+                              ],
+                            )),
                           ),
                           Expanded(
                             flex: 2,
-                            child: Container(
-                              height: 50,
+                            child: SizedBox(
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
                                   CustomSimpleTextField(
                                     hintText: txtVS,
-                                    textSize: 35,
+                                    textSize: MediaQuery.of(Get.context!)
+                                            .size
+                                            .height *
+                                        0.04,
                                     hintColor: appColor,
                                     fontfamily: 'summary',
                                   ),
@@ -192,50 +196,51 @@ _bodyWidget(PlayTicToeController controller) {
                           ),
                           Expanded(
                             flex: 3,
-                            child: Container(
-                                height: 100,
+                            child: SizedBox(
                                 child: Stack(
-                                  alignment: Alignment.bottomCenter,
-                                  children: [
-                                    // Container(
-                                    //   height: 60,
-                                    //   color: Colors.white,
-                                    // ),
-                                    CircleAvatar(
-                                      backgroundColor: appColor,
-                                      radius: 60,
-                                      child: Image.asset(
-                                          controller.selectedItem?.imageAsset ??
-                                              "",
-                                          width: 70,
-                                          height: 70),
-                                    ),
-                                    Positioned(
-                                      bottom: 2, // Use bottom instead of top
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15.0, right: 15),
-                                          child: Center(
-                                            child: CustomSimpleTextField(
-                                              textSizeValue: true,
-                                              hintText: controller
-                                                      .selectedItem?.text ??
+                              alignment: Alignment.bottomCenter,
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: appColor,
+                                  radius:
+                                      MediaQuery.of(Get.context!).size.height *
+                                          0.06,
+                                  child: Image.asset(
+                                      controller.selectedItem?.imageAsset ?? "",
+                                      height: MediaQuery.of(Get.context!)
+                                              .size
+                                              .height *
+                                          0.06),
+                                ),
+                                Positioned(
+                                  bottom: 0, // Use bottom instead of top
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15.0, right: 15),
+                                      child: Center(
+                                        child: CustomSimpleTextField(
+                                          textSizeValue: true,
+                                          hintText:
+                                              controller.selectedItem?.text ??
                                                   "",
-                                              textSize: 20,
-                                              hintColor: Colors.white,
-                                              fontfamily: 'summary',
-                                            ),
-                                          ),
+                                          textSize: MediaQuery.of(Get.context!)
+                                                  .size
+                                                  .height *
+                                              0.022,
+                                          hintColor: Colors.white,
+                                          fontfamily: 'summary',
                                         ),
                                       ),
                                     ),
-                                  ],
-                                )),
+                                  ),
+                                ),
+                              ],
+                            )),
                           ),
                         ],
                       ),
@@ -253,18 +258,21 @@ _bodyWidget(PlayTicToeController controller) {
                             textSizeValue: true,
                             hintText:
                                 '${controller.player2Wins}-${controller.numSeries}',
-                            textSize: 30,
+                            textSize:
+                                MediaQuery.of(Get.context!).size.height * 0.035,
                             hintColor: appColor,
                             fontfamily: 'Monstreat',
                           ),
                           SizedBox(
-                            width: 40,
+                            width:
+                                MediaQuery.of(Get.context!).size.height * 0.0,
                           ),
                           CustomSimpleTextField(
                             textSizeValue: true,
                             hintText:
                                 '${controller.player1Wins}-${controller.numSeries}',
-                            textSize: 30,
+                            textSize:
+                                MediaQuery.of(Get.context!).size.height * 0.035,
                             hintColor: appColor,
                             fontfamily: 'Monstreat',
                           ),
@@ -288,7 +296,8 @@ _bodyWidget(PlayTicToeController controller) {
                               //     : ''
                               : '''Player ${controller.playerTurnName ?? controller.selectedItem1!.text}'s turn'''
                                   '',
-                          textSize: 30,
+                          textSize:
+                              MediaQuery.of(Get.context!).size.height * 0.032,
                           hintColor: appColor,
                           fontfamily: 'summary',
                         ),
@@ -365,15 +374,21 @@ _bodyWidget(PlayTicToeController controller) {
                                                 controller.selectedItem
                                                         ?.imageAsset ??
                                                     "",
-                                                width: 80,
-                                                height: 80)
+                                                height:
+                                                    MediaQuery.of(Get.context!)
+                                                            .size
+                                                            .height *
+                                                        0.06)
                                             : cellContent == 'O'
                                                 ? Image.asset(
                                                     controller.selectedItem1
                                                             ?.imageAsset ??
                                                         '',
-                                                    width: 70,
-                                                    height: 70)
+                                                    height: MediaQuery.of(
+                                                                Get.context!)
+                                                            .size
+                                                            .height *
+                                                        0.06)
                                                 : null,
                                       ),
                                     ),
@@ -424,7 +439,7 @@ showDialogBox(PlayTicToeController controller) {
       return Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(apphow),
+          Image.asset(apphow, height: MediaQuery.of(context).size.width * 0.8),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -459,10 +474,12 @@ showDialogBox(PlayTicToeController controller) {
                     children: [
                       Image.asset(
                         appbtn,
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.5,
                       ),
                       Center(
                         child: CustomSimpleTextField(
+                          textSizeValue: true,
+                          underLineValue: false,
                           textAlign: TextAlign.center,
                           hintText: 'OKAY!!',
                           textSize:

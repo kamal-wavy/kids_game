@@ -113,12 +113,20 @@ _bodyWidget(TicToeSelectAvtarController controller) {
                                           child: Row(
                                             children: <Widget>[
                                               Image.asset(item.imageAsset,
-                                                  width: 40, height: 40),
+                                                height:  MediaQuery.of(Get.context!)
+                                                    .size
+                                                    .height
+                                                    *
+                                                    0.03,),
                                               SizedBox(width: 8),
                                               CustomSimpleTextField(
                                                 textSizeValue: true,
                                                 hintText: item.text,
-                                                textSize: 25,
+                                                textSize: MediaQuery.of(Get.context!)
+                                                    .size
+                                                    .height
+                                                    *
+                                                    0.025,
                                                 hintColor: appColor,
                                                 fontfamily: 'summary',
                                               ),
@@ -134,7 +142,11 @@ _bodyWidget(TicToeSelectAvtarController controller) {
                                         child: CustomSimpleTextField(
                                           textSizeValue: true,
                                           hintText: txtAvtar1,
-                                          textSize: 20,
+                                          textSize: MediaQuery.of(Get.context!)
+                                                  .size
+                                                  .height
+                                                 *
+                                              0.02,
                                           hintColor: appColor,
                                           fontfamily: 'Montstreat',
                                         ),
@@ -164,12 +176,20 @@ _bodyWidget(TicToeSelectAvtarController controller) {
                                           child: Row(
                                             children: <Widget>[
                                               Image.asset(item.imageAsset,
-                                                  width: 40, height: 40),
+                                              height:   MediaQuery.of(Get.context!)
+                                                    .size
+                                                    .height
+                                                    *
+                                                    0.03,),
                                               SizedBox(width: 8),
                                               CustomSimpleTextField(
                                                 textSizeValue: true,
                                                 hintText: item.text,
-                                                textSize: 25,
+                                                textSize:   MediaQuery.of(Get.context!)
+                                                    .size
+                                                    .height
+                                                    *
+                                                    0.025,
                                                 hintColor: appColor,
                                                 fontfamily: 'summary',
                                               ),
@@ -185,7 +205,11 @@ _bodyWidget(TicToeSelectAvtarController controller) {
                                         child: CustomSimpleTextField(
                                           textSizeValue: true,
                                           hintText: txtAvtar2,
-                                          textSize: 20,
+                                          textSize: MediaQuery.of(Get.context!)
+                                              .size
+                                              .height
+                                              *
+                                              0.02,
                                           hintColor: appColor,
                                           fontfamily: 'Montstreat',
                                         ),

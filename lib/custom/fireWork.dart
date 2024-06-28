@@ -41,7 +41,9 @@ class _FireworkAnimationState extends State<FireworkAnimation>
       builder: (context, child) {
         return CustomPaint(
           size: Size(200, 200),
-          painter: FireworkPainter(animationValue: animation!.value,),
+          painter: FireworkPainter(
+            animationValue: animation!.value,
+          ),
         );
       },
     );
@@ -68,7 +70,8 @@ class FireworkPainter extends CustomPainter {
 
     // Draw shockwave
     double currentRadius = maxRadius * animationValue;
-    canvas.drawCircle(Offset(size.width / 2, size.height / 2), currentRadius, shockwavePaint);
+    canvas.drawCircle(
+        Offset(size.width / 2, size.height / 2), currentRadius, shockwavePaint);
 
     // Draw smoke
     final Random random = Random();

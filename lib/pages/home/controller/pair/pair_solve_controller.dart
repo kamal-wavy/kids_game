@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../color.dart';
 import '../../../../custom/simpleText.dart';
+import '../../../../custom/take_screenshot.dart';
 import '../../../../image.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../../string.dart';
@@ -63,11 +64,21 @@ class PairSolveController extends GetxController
     return appBarOffset;
   }
 
-  void playAnimation() {
+  final AudioPlayer audioPlayerBlast = AudioPlayer();
+  String audioPathbBlast = 'audio/four.mp3';
 
+  void playAnimation() async {
     animationControllerBlast!.forward(from: 0.0);
+    await audioPlayerBlast.play(AssetSource(audioPathbBlast));
 
+    print('Audio playing  blast 1414');
   }
+
+  void takeScreenshotMethod() {
+    final screnCpntroller = Get.put(ScreenshotController());
+    screnCpntroller.takeScreenshotAndShare();
+  }
+
   checkResult() {
     stopTimer();
 
@@ -79,11 +90,10 @@ class PairSolveController extends GetxController
       );
     });
     startAnimation();
-    startBlast=1;
+    startBlast = 1;
     playAnimation();
     dh();
     update();
-
   }
 
   @override
@@ -137,7 +147,7 @@ class PairSolveController extends GetxController
           );
         });
         startAnimation();
-        startBlast=1;
+        startBlast = 1;
         playAnimation();
         dh();
         update();
@@ -167,11 +177,10 @@ class PairSolveController extends GetxController
           );
         });
         startAnimation();
-        startBlast=1;
+        startBlast = 1;
         playAnimation();
         dh();
         update();
-
       }
     } else {
       showTemporaryMessage("Wrong! Try again");
@@ -283,7 +292,8 @@ class PairSolveController extends GetxController
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(appPause),
+              Image.asset(appPause,
+                  height: MediaQuery.of(context).size.width * 0.9),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -294,7 +304,7 @@ class PairSolveController extends GetxController
                       child: CustomSimpleTextField(
                         textAlign: TextAlign.center,
                         hintText: txtGameDonotResume,
-                        textSize: 28,
+                        textSize: MediaQuery.of(context).size.width * 0.060,
                         hintColor: blackColor,
                         fontfamily: 'summary',
                       ),
@@ -304,7 +314,7 @@ class PairSolveController extends GetxController
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
                         onTap: () {
-                         playAudio();
+                          playAudio();
                           Get.back();
                           togglePlayPause();
                         },
@@ -312,12 +322,13 @@ class PairSolveController extends GetxController
                           alignment: Alignment.center,
                           children: [
                             Image.asset(appbtn,
-                                width: MediaQuery.of(context).size.width * 0.6),
+                                width: MediaQuery.of(context).size.width * 0.5),
                             CustomSimpleTextField(
-                              // textSizeValue: true ,
-
+                              textSizeValue: true,
+                              underLineValue: false,
                               hintText: txtResume,
-                              textSize: 32,
+                              textSize:
+                                  MediaQuery.of(context).size.width * 0.060,
                               hintColor: Colors.white,
                               fontfamily: 'summary',
                             ),
@@ -332,7 +343,7 @@ class PairSolveController extends GetxController
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize: MediaQuery.of(context).size.width * 0.070,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
@@ -359,7 +370,7 @@ class PairSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -402,7 +413,7 @@ class PairSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -446,7 +457,7 @@ class PairSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -489,7 +500,7 @@ class PairSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -532,7 +543,7 @@ class PairSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -599,15 +610,20 @@ class PairSolveController extends GetxController
                       Flexible(
                         child: CustomSimpleTextField(
                           hintText: txtGameOver,
-                          textSize: 35,
+                          textSize:
+                              MediaQuery.of(Get.context!).size.height.toInt() *
+                                  0.04,
                           hintColor: appRedColor,
                           fontfamily: 'summary',
                         ),
                       ),
                       Flexible(
                         child: CustomSimpleTextField(
-                          hintText: '$txtGameTime $secondsElapsed seconds',
-                          textSize: 20,
+                          hintText:
+                              '$txtGameTime ${formatTime(secondsElapsed)}',
+                          textSize:
+                              MediaQuery.of(Get.context!).size.height.toInt() *
+                                  0.025,
                           hintColor: appColor,
                           fontfamily: 'Montstreat',
                         ),
@@ -620,8 +636,46 @@ class PairSolveController extends GetxController
                             blastController.stop();
                             Get.offAll(PairGridScreen());
                           },
-                          child: Image.asset(appFinish),
+                          child: Image.asset(
+                            appFinish,
+                            height: MediaQuery.of(Get.context!)
+                                    .size
+                                    .height
+                                    .toInt() *
+                                0.05,
+                          ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.pink,
+                            ),
+                          ),
+                          Flexible(
+                            child: GestureDetector(
+                              onTap: () {
+                                takeScreenshotMethod();
+                              },
+                              child: CustomSimpleTextField(
+                                underLineValue: false,
+                                textSizeValue: true,
+                                hintText: 'Share With Friends',
+                                textSize: MediaQuery.of(Get.context!)
+                                        .size
+                                        .height
+                                        .toInt() *
+                                    0.020,
+                                hintColor: appColor,
+                                fontfamily: 'Montstreat',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -675,17 +729,22 @@ class PairSolveController extends GetxController
     GlobalKey key3 = GlobalKey();
     GlobalKey key4 = GlobalKey();
     GlobalKey key5 = GlobalKey();
+    GlobalKey key6 = GlobalKey();
+    GlobalKey key7 = GlobalKey();
 
     itemListAlpahbet = [
       ItemModel1('O', 'assets/birds/owl.png', key1),
       ItemModel1('P', 'assets/birds/parrot.png', key2),
       ItemModel1('D', 'assets/animalspics/dino.png', key3),
       ItemModel1('E', 'assets/animalspics/elephant.png', key4),
-      ItemModel1('B', 'assets/stationary/book.png', key5),
+      ItemModel1('B', 'assets/animalspics/book.png', key5),
+      // ItemModel1('H', 'assets/animalspics/helicopter.png', key6),
+      // ItemModel1('C', 'assets/animalspics/car.png', key7),
     ];
     itemListAlpahbet2 = List<ItemModel1>.from(itemListAlpahbet!);
     itemListAlpahbet2!.shuffle();
     itemListAlpahbet!.shuffle();
+    // itemListAlpahbet2 = itemListAlpahbet!.sublist(0, 5);
   }
 
   void initNextItemListAlpahbet() {
@@ -872,6 +931,7 @@ class LinePainter extends CustomPainter {
     return true;
   }
 }
+
 class LinePainterWidget extends StatelessWidget {
   final Offset start;
   final Offset end;

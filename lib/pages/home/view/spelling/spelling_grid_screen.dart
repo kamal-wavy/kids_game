@@ -123,9 +123,8 @@ _bodyWidget(SpellingGridController controller) {
                             children: [
                               Image.asset(
                                 controller.yourDataList[index].imageUrl,
-                                // Replace with the image URL from your data model
-                                height: 80, // Adjust the height as needed
-                                width: 80, // Adjust the width as needed
+                                height: MediaQuery.of(Get.context!).size.height.toInt() *
+                                    0.09,
                                 fit: BoxFit.cover,
                               ),
                               SizedBox(height: 8.0),
@@ -149,35 +148,58 @@ _bodyWidget(SpellingGridController controller) {
           ],
         ),
       ),
-      Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Hero(tag: 'heroTag',
-              child: Lottie.asset('assets/robt.json',height: 140,)),
-          Container(
-
+      controller.isNumberPuzzleRobotShown==false?
+      checkRobot(controller):
+      Text('')
+    ],
+  );
+}
+Widget checkRobot(SpellingGridController controller) {
+  if (!controller.isNumberPuzzleRobotShown) {
+    // Display UI containing Lottie animation and text field
+    Widget robotUI = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Hero(
+          tag: 'heroTag',
+          child: Lottie.asset(
+            'assets/robt.json',
+            height: 140,
+          ),
+        ),
+        Expanded(
+          child: Container(
             decoration: BoxDecoration(
-                color:appPinkColor,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(25),
-                  topLeft:Radius.circular(25),
-                  bottomRight: Radius.circular(25),
-                )
+              color: appPinkColor,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(25),
+                topLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: CustomSimpleTextField(letterpsacingValue: true,
+              child: CustomSimpleTextField(
+                letterpsacingValue: true,
                 textSizeValue: true,
                 textAlign: TextAlign.center,
                 hintText: controller.text,
                 textSize: MediaQuery.of(Get.context!).size.width * 0.04,
                 hintColor: Colors.white,
                 fontfamily: 'summary',
+
               ),
             ),
           ),
-        ],
-      ),
-    ],
-  );
+        ),
+      ],
+    );
+
+    // Write to controller.box that isNumberPuzzleRobotShown is true
+    // controller.box.write('isSpellingGameRobotShown', true);
+
+    return robotUI; // Return the UI
+  } else {
+    return Text('kamalmal'); // Return the text widget
+  }
 }

@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 
 import '../../../../color.dart';
 import '../../../../custom/simpleText.dart';
+import '../../../../custom/take_screenshot.dart';
 import '../../../../image.dart';
-import '../../../../routes/app_routes.dart';
 import '../../../../string.dart';
 import '../../view/math/math_grid.dart';
 
@@ -22,7 +22,6 @@ class MathQuizSolveController extends GetxController
   int currentStep = 1;
   String audioPath = 'audio/click.mp3';
   final blastController = ConfettiController();
-
 
   int num1 = 0;
   int num2 = 0;
@@ -38,6 +37,11 @@ class MathQuizSolveController extends GetxController
 
   String audioPathbBlast = 'audio/four.mp3';
 
+  void takeScreenshotMethod() {
+    final screnCpntroller = Get.put(ScreenshotController());
+    screnCpntroller.takeScreenshotAndShare();
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -49,14 +53,14 @@ class MathQuizSolveController extends GetxController
       duration: Duration(seconds: 10), // Adjust the duration as needed
     );
   }
-  int start = 0;
-  void playAnimation()async {
 
+  int start = 0;
+
+  void playAnimation() async {
     animationControllerBlast!.forward(from: 0.0);
     await audioPlayerBlast.play(AssetSource(audioPathbBlast));
 
     print('Audio playing  blast 1414');
-
   }
 
   void generateQuestion() {
@@ -129,6 +133,7 @@ class MathQuizSolveController extends GetxController
       answerOptionsDivision.shuffle();
     }
   }
+
   void showTemporaryMessage(String messageToShow) {
     message = messageToShow;
     showMessage = true;
@@ -160,7 +165,7 @@ class MathQuizSolveController extends GetxController
           );
         });
         startAnimation();
-        start=1;
+        start = 1;
         playAnimation();
         dh();
         update();
@@ -190,8 +195,8 @@ class MathQuizSolveController extends GetxController
           );
         });
         startAnimation();
-        start=1;
-       playAnimation();
+        start = 1;
+        playAnimation();
         dh();
         update();
       }
@@ -306,7 +311,7 @@ class MathQuizSolveController extends GetxController
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(appPause),
+              Image.asset(appPause,height:  MediaQuery.of(context).size.width * 0.9),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -317,7 +322,7 @@ class MathQuizSolveController extends GetxController
                       child: CustomSimpleTextField(
                         textAlign: TextAlign.center,
                         hintText: txtGameDonotResume,
-                        textSize: 28,
+                        textSize:  MediaQuery.of(context).size.width * 0.060,
                         hintColor: blackColor,
                         fontfamily: 'summary',
                       ),
@@ -327,7 +332,7 @@ class MathQuizSolveController extends GetxController
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
                         onTap: () {
-                        playAudio();
+                          playAudio();
                           Get.back();
                           togglePlayPause();
                         },
@@ -335,12 +340,12 @@ class MathQuizSolveController extends GetxController
                           alignment: Alignment.center,
                           children: [
                             Image.asset(appbtn,
-                                width: MediaQuery.of(context).size.width * 0.6),
+                                width: MediaQuery.of(context).size.width * 0.5),
                             CustomSimpleTextField(
-                              // textSizeValue: true ,
-
+                              textSizeValue: true ,
+underLineValue: false,
                               hintText: txtResume,
-                              textSize: 32,
+                              textSize:   MediaQuery.of(context).size.width * 0.060,
                               hintColor: Colors.white,
                               fontfamily: 'summary',
                             ),
@@ -349,8 +354,8 @@ class MathQuizSolveController extends GetxController
                   ),
                   GestureDetector(
                     onTap: () {
-                 playAudio();
-                 Get.offAll(MathGridScreen());
+                      playAudio();
+                      Get.offAll(MathGridScreen());
                       // timer!.cancel();
                       // isTimerPaused = false;
                       // Get.offNamed(AppRoutes.animalGridScreen);
@@ -358,7 +363,7 @@ class MathQuizSolveController extends GetxController
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize:  MediaQuery.of(context).size.width * 0.070,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
@@ -385,7 +390,7 @@ class MathQuizSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -428,7 +433,7 @@ class MathQuizSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -472,7 +477,7 @@ class MathQuizSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -515,7 +520,7 @@ class MathQuizSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -558,7 +563,7 @@ class MathQuizSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -625,15 +630,23 @@ class MathQuizSolveController extends GetxController
                       Flexible(
                         child: CustomSimpleTextField(
                           hintText: txtGameOver,
-                          textSize: 35,
+                          textSize:  MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.04,
                           hintColor: appRedColor,
                           fontfamily: 'summary',
                         ),
                       ),
                       Flexible(
                         child: CustomSimpleTextField(
-                          hintText: '$txtGameTime $secondsElapsed seconds',
-                          textSize: 20,
+                          hintText:'$txtGameTime ${formatTime(secondsElapsed)}',
+                          textSize:  MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.025,
                           hintColor: appColor,
                           fontfamily: 'Montstreat',
                         ),
@@ -648,8 +661,44 @@ class MathQuizSolveController extends GetxController
                             print('Audio stop  blast 1414');
                             Get.offAll(MathGridScreen());
                           },
-                          child: Image.asset(appFinish),
+                          child: Image.asset(
+                            appFinish,
+                              height:  MediaQuery.of(Get.context!)
+                                  .size
+                                  .height
+                                  .toInt() *
+                                  0.05
+                          ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.share,color: Colors.pink,),
+                          ),
+                          Flexible(
+                            child: GestureDetector(
+                              onTap: () {
+                                takeScreenshotMethod();
+                              },
+                              child: CustomSimpleTextField(
+
+                                underLineValue:false,
+                                textSizeValue: true ,
+                                hintText: 'Share With Friends',
+                                textSize:  MediaQuery.of(Get.context!)
+                                    .size
+                                    .height
+                                    .toInt() *
+                                    0.020,
+                                hintColor: appColor,
+                                fontfamily: 'Montstreat',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

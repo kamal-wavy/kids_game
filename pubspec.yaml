@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+5
+version: 1.0.0+15
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
@@ -45,7 +45,14 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   confetti: ^0.7.0
   lottie: ^3.0.0
-
+  flutter_native_screenshot: ^1.1.2
+  esys_flutter_share_plus: ^2.2.0
+  flip_card: ^0.7.0
+  animated_flip_widget: ^0.0.2
+  flutter_tts: ^4.0.1
+  in_app_review: ^2.0.9
+  word_search_safety: ^0.1.2-nullsafety.1
+  english_words: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -83,11 +90,14 @@ flutter:
     - assets/animalspics/
     - assets/hindi/
     - assets/animal/
+    - assets/match/
     - assets/pair/
+    - assets/story/
     - assets/audio/
     - assets/boy.json
     - assets/robt.json
     - assets/s.json
+    - assets/loader.json
 
 
   #   - images/a_dot_ham.jpeg
@@ -110,8 +120,11 @@ flutter:
      - family: Montstreat
        fonts:
          - asset: assets/fonts/Montserrat-SemiBold.ttf
+     - family: Digitalt
+       fonts:
+        - asset: assets/fonts/Digitalt.ttf
 
-  #   - family: Trajan Pro
+  #   - family: Trajan Pro  Digitalt.ttf
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf

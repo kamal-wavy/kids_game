@@ -1,20 +1,23 @@
 import 'package:KidsPlan/color.dart';
 import 'package:KidsPlan/custom/simpleText.dart';
 import 'package:KidsPlan/image.dart';
+import 'package:KidsPlan/pages/home/view/chnages+word/chnage_screen.dart';
+import 'package:KidsPlan/pages/home/view/word/word_option_list.dart';
 import 'package:KidsPlan/pages/initial/controller/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 
 import '../../../app_argument.dart';
-import '../../home/view/image/puzzle_option.dart';
+import '../../../dlt.dart';
 import '../../home/view/math/math_grid.dart';
+import '../../home/view/memory/memory_grid.dart';
 import '../../home/view/number/number_puzzle_list_screen.dart';
 import '../../home/view/pair/pair_grid.dart';
 import '../../home/view/selectImage/animal_grid_screen.dart';
 import '../../home/view/spelling/spelling_grid_screen.dart';
+import '../../home/view/story/stories_oprtions_grid.dart';
 import '../../home/view/tictoe/select_tic_toe_avtar_screen.dart';
 import '../controller/select_game_contoller.dart';
 
@@ -63,7 +66,7 @@ _bodyWidget(SelectGameController controller) {
                     bottomLeft: Radius.circular(30))),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15, top: 20, bottom: 20),
+                  left: 15, right: 15, top: 20, bottom: 20),
               child: SafeArea(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -73,7 +76,7 @@ _bodyWidget(SelectGameController controller) {
                         CircleAvatar(
                           radius:
                               MediaQuery.of(Get.context!).size.height.toInt() *
-                                  0.05,
+                                  0.04,
                           backgroundColor: appBackColor,
                           child: Padding(
                             padding: const EdgeInsets.all(5.0),
@@ -104,7 +107,12 @@ _bodyWidget(SelectGameController controller) {
                                                 ? "Good Evening"
                                                 : "Good night",
                                     textSizeValue: true,
-                                    textSize: 28,
+                                    textSize: MediaQuery.of(Get.context!)
+                                            .size
+                                            .height
+                                            .toInt() *
+                                        0.03,
+                                    //24,
                                     // borderLineValue: true,
                                     fontfamily: 'summary',
                                     // hintColor: appyellowColor,
@@ -113,7 +121,7 @@ _bodyWidget(SelectGameController controller) {
                                     padding: const EdgeInsets.only(left: 5.0),
                                     child: Image.asset(
                                       appSmile,
-                                      height: 34,
+                                      height: 25,
                                     ),
                                   )
                                 ],
@@ -132,7 +140,11 @@ _bodyWidget(SelectGameController controller) {
                                             13) ??
                                         "",
                                     // hintText: controller.AvtarName ?? "",
-                                    textSize: 25,
+                                    textSize: MediaQuery.of(Get.context!)
+                                            .size
+                                            .height
+                                            .toInt() *
+                                        0.03,
                                     hintColor: appyellowColor,
                                     fontfamily: 'summary',
                                   ),
@@ -142,42 +154,6 @@ _bodyWidget(SelectGameController controller) {
                                       child: GestureDetector(
                                           onTap: () {
                                             _showResumePopup(controller);
-                                            // showDialog(
-                                            //   context: Get.context!,
-                                            //   builder: (BuildContext context) {
-                                            //     return AlertDialog(
-                                            //       title: Text('Edit Name'),
-                                            //       content: TextField(
-                                            //         controller: controller
-                                            //             .textFieldController,
-                                            //         decoration: InputDecoration(
-                                            //             hintText: 'Enter Name'),
-                                            //       ),
-                                            //       actions: <Widget>[
-                                            //         TextButton(
-                                            //           onPressed: () {
-                                            //             Get.back();
-                                            //           },
-                                            //           child: Text('Cancel'),
-                                            //         ),
-                                            //         ElevatedButton(
-                                            //           onPressed: () {
-                                            //             controller.userData.write(
-                                            //                 userName,
-                                            //                 controller
-                                            //                     .textFieldController
-                                            //                     .text);
-                                            //             controller.editName = 1;
-                                            //
-                                            //             controller.update();
-                                            //             Get.back();
-                                            //           },
-                                            //           child: Text('OK'),
-                                            //         ),
-                                            //       ],
-                                            //     );
-                                            //   },
-                                            // );
                                           },
                                           child: Icon(
                                             Icons.edit,
@@ -204,98 +180,6 @@ _bodyWidget(SelectGameController controller) {
               ),
             ),
           ),
-          // Expanded(
-          //     // flex:3,
-          //     flex: (MediaQuery.of(Get.context!).size.height * 1.2).toInt(),
-          //     // flex: MediaQuery.of(Get.context!).size.height.toInt() * 1,
-          //     child: Container(
-          //       decoration: BoxDecoration(
-          //           color: appColor,
-          //           borderRadius: BorderRadius.only(
-          //               bottomRight: Radius.circular(50),
-          //               bottomLeft: Radius.circular(50))),
-          //       child: SafeArea(
-          //         child: Column(
-          //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //           // mainAxisAlignment: MainAxisAlignment.center,
-          //           children: [
-          //             Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //               children: [
-          //                 SizedBox(
-          //                   width: 50,
-          //                 ),
-          //                 Column(
-          //                   children: [
-          //                     CircleAvatar(
-          //                       radius: MediaQuery.of(Get.context!)
-          //                               .size
-          //                               .height
-          //                               .toInt() *
-          //                           0.07,
-          //                       backgroundColor: appBackColor,
-          //                       child: Padding(
-          //                         padding: const EdgeInsets.all(5.0),
-          //                         child: Center(
-          //                             child: Image.asset(controller.AvtarImage ?? ""
-          //                                 // apppp
-          //                                 )),
-          //                       ),
-          //                     ),
-          //                     CustomSimpleTextField(
-          //                       hintText: int.parse(DateFormat("HH")
-          //                                   .format(DateTime.now())) <
-          //                               12
-          //                           ? "Good Morning"
-          //                           : int.parse(DateFormat("HH")
-          //                                       .format(DateTime.now())) <
-          //                                   16
-          //                               ? "Good AfterNoon"
-          //                               : int.parse(DateFormat("HH")
-          //                                           .format(DateTime.now())) <
-          //                                       21
-          //                                   ? "Good Evening"
-          //                                   : "Good night",
-          //                       textSizeValue: true,
-          //                       textSize: 20,
-          //                       fontfamily: 'summary',
-          //                     ),
-          //                   ],
-          //                 ),
-          //                 Padding(
-          //                   padding: const EdgeInsets.only(bottom: 120.0, right: 5),
-          //                   child: Row(
-          //                     mainAxisAlignment: MainAxisAlignment.end,
-          //                     children: [
-          //                       IconButton(
-          //                           onPressed: () {
-          //                             showDialogBox(controller);
-          //                           },
-          //                           icon: Icon(
-          //                             Icons.settings,
-          //                             color: Colors.white,
-          //                             size: 30,
-          //                           ))
-          //                     ],
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //             Padding(
-          //               padding:
-          //                   const EdgeInsets.only(left: 10, right: 10.0, bottom: 5),
-          //               child: CustomSimpleTextField(
-          //                 borderLineValue: true,
-          //                 hintText: controller.AvtarName ?? "",
-          //                 textSize: 30,
-          //                 hintColor: appyellowColor,
-          //                 fontfamily: 'summary',
-          //               ),
-          //             )
-          //           ],
-          //         ),
-          //       ),
-          //     )),
           Expanded(
               // flex: 7,
               flex: MediaQuery.of(Get.context!).size.height.toInt() * 2,
@@ -314,7 +198,8 @@ _bodyWidget(SelectGameController controller) {
                       onTap: () {
                         controller.playAudio();
                         controller.mixedData[index].num == 1
-                            ? Get.to(NumberPuzzleListScreen())
+                            ? Get.to(() => NumberPuzzleListScreen())
+                            // Get.to(NumberPuzzleListScreen())
                             : controller.mixedData[index].num == 3
                                 ? Get.to(AnimalGridScreen())
                                 : controller.mixedData[index].num == 4
@@ -326,10 +211,35 @@ _bodyWidget(SelectGameController controller) {
                                             : controller.mixedData[index].num ==
                                                     7
                                                 ? Get.to(MathGridScreen())
-                                                : Get.to(
-                                                    ImagePuzzleOptionScreen());
-                      }, // Get.offNamed(AppRoutes.mathGridScreen);
-                      // Get.offNamed(AppRoutes.pairGridScreen);
+                                                : controller.mixedData[index]
+                                                            .num ==
+                                                        9
+                                                    ? Get.to(
+                                                        StoryOptionGridScreen())
+                                                    : controller
+                                                                .mixedData[
+                                                                    index]
+                                                                .num ==
+                                                            10
+                                                        ? 
+                         //   Navigator.push(context, MaterialPageRoute(builder: (context)=>WordSearch()))
+                        Get.to(
+
+                          // WordSearchGame(
+                          //   words: ['FLUTTER', 'WORD', 'SEARCH', 'GAME'],
+                          //   gridSize: 10,
+                          // ),
+                                                   WordOptionListScreen()
+                        )
+                                                        : Get.to(
+                                                            MemoryGridScreen());
+
+                        controller.incrementGamesPlayed();
+                        if (controller.gamesPlayed.value == 5) {
+                          // controller.requestReview();
+                          controller.showReviewDialog();
+                        }
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
@@ -388,53 +298,6 @@ _bodyWidget(SelectGameController controller) {
                   itemCount: controller.mixedData.length,
                 ),
               )),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     Lottie.asset('assets/robt.json',height: 100,),
-          //     CustomSimpleTextField(
-          //       textAlign: TextAlign.center,
-          //       hintText: controller.text,
-          //       textSize:
-          //       MediaQuery.of(Get.context!).size.width * 0.05,
-          //       hintColor: appPinkColor,
-          //       fontfamily: 'summary',
-          //     ),
-          //   ],
-          // ),
-        ],
-      ),
-      Row(
-       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Hero(
-              tag: 'heroTag',
-              child: Lottie.asset(
-                'assets/robt.json',
-                height: 120,
-              )),
-          Container(
-
-            decoration: BoxDecoration(
-              color:appPinkColor,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(25),
-                  topLeft:Radius.circular(25),
-                bottomRight: Radius.circular(25),
-              )
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: CustomSimpleTextField(letterpsacingValue: true,
-textSizeValue: true,
-                textAlign: TextAlign.center,
-                hintText: controller.text,
-                textSize: MediaQuery.of(Get.context!).size.width * 0.04,
-                hintColor: Colors.white,
-                fontfamily: 'summary',
-              ),
-            ),
-          ),
         ],
       ),
     ],
@@ -453,7 +316,10 @@ showDialogBox(SelectGameController controller) {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Image.asset(appBgMusic),
+                Image.asset(
+                  appBgMusic,
+                  height: MediaQuery.of(Get.context!).size.height * 0.4,
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -548,7 +414,10 @@ void _showResumePopup(SelectGameController controller) {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset(appEdit),
+            Image.asset(
+              appEdit,
+              height: MediaQuery.of(Get.context!).size.height * 0.4,
+            ),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -561,7 +430,7 @@ void _showResumePopup(SelectGameController controller) {
                       width: MediaQuery.of(Get.context!).size.width * 0.5,
                       child: Form(
                         key: controller.formKey,
-                        child: new TextFormField(
+                        child: TextFormField(
                           controller: controller.textFieldController,
                           autofocus: true,
                           decoration: InputDecoration(
@@ -588,6 +457,11 @@ void _showResumePopup(SelectGameController controller) {
                             }
                             return null;
                           },
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                controller.alphanumericRegex),
+                            FilteringTextInputFormatter.deny(RegExp("[0-9]")),
+                          ],
                           keyboardType: TextInputType.emailAddress,
                           style: new TextStyle(
                             fontFamily: "Poppins",
@@ -624,9 +498,13 @@ void _showResumePopup(SelectGameController controller) {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomSimpleTextField(
+                                textSizeValue: true,
+                                underLineValue: false,
                                 textAlign: TextAlign.center,
                                 hintText: 'OKAY',
-                                textSize: 30,
+                                textSize:
+                                    MediaQuery.of(Get.context!).size.height *
+                                        0.03,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -641,7 +519,7 @@ void _showResumePopup(SelectGameController controller) {
                   },
                   child: CustomSimpleTextField(
                     hintText: 'CANCEL',
-                    textSize: 30,
+                    textSize: MediaQuery.of(Get.context!).size.height * 0.03,
                     hintColor: appRedColor,
                     fontfamily: 'summary',
                   ),

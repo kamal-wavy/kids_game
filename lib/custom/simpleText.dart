@@ -53,6 +53,10 @@ letterpsacingValue: widget.letterpsacingValue,
                 borderText: widget.borderLineValue,
                 customFamily: widget.fontfamily ?? FontWeight.bold,
                 textColor: widget.hintColor,
-                size: widget.textSize));
+                size: widget.textSize,
+                decoration: widget.underLineValue == true
+                    ? TextDecoration.underline
+                    : TextDecoration.none
+            ));
   }
 }

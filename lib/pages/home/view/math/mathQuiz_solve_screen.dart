@@ -158,7 +158,7 @@ _bodyWidget(MathQuizSolveController controller) {
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.center,
                                 children: [
                                   CustomSimpleTextField(
                                     textSizeValue: true,
@@ -167,15 +167,18 @@ _bodyWidget(MathQuizSolveController controller) {
                                         : controller.getRoleId == '2'
                                             ? "${controller.num1} - ${controller.num2} ="
                                             : controller.getRoleId == '3'
-                                                ? "${controller.num1} * ${controller.num2} ="
+                                                ? "${controller.num1} x ${controller.num2} ="
                                                 : "${controller.num1} / ${controller.num2} =",
                                     fontfamily: 'Montstreat',
                                     textSize:
                                         MediaQuery.of(Get.context!).size.width *
-                                            0.10,
+                                            0.09,
                                     hintColor: Colors.white,
                                   ),
-                                  Image.asset(appQuestion),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10.0,right: 5),
+                                    child: Image.asset(appQuestion),
+                                  ),
                                 ],
                               ),
                             )
@@ -336,7 +339,7 @@ showDialogBox(MathQuizSolveController controller) {
       return Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(apphow),
+          Image.asset(apphow,height:  MediaQuery.of(context).size.width * 0.9),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -389,10 +392,12 @@ showDialogBox(MathQuizSolveController controller) {
                     children: [
                       Image.asset(
                         appbtn,
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.5,
                       ),
                       Center(
                         child: CustomSimpleTextField(
+                          underLineValue: false,
+                          textSizeValue: true,
                           textAlign: TextAlign.center,
                           hintText: 'OKAY!!',
                           textSize:

@@ -8,6 +8,8 @@ class SelectAvtarController extends GetxController {
   TextEditingController textFieldController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final AudioPlayer audioPlayer = AudioPlayer();
+  final RegExp alphanumericRegex = RegExp(r'^[a-zA-Z\s]+$');
+  final maxLength = 12;
 
   final userData = GetStorage();
   String validationMessage = '';
@@ -34,6 +36,15 @@ class SelectAvtarController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    textFieldController.addListener(limitTextLength);
+  }
+  void limitTextLength() {
+    if (textFieldController.text.length > maxLength) {
+      textFieldController.text = textFieldController.text.substring(0, maxLength);
+      textFieldController.selection = TextSelection.fromPosition(
+          TextPosition(offset: textFieldController.text.length));
+    }
+    update();
   }
 
   @override

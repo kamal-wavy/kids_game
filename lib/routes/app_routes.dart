@@ -18,4 +18,8 @@ abstract class AppRoutes {
   static const mathGridScreen = '/mathGridScreen';
   static const pairGridScreen = '/pairGridScreen';
   static const pairSolveScreen = '/pairSolveScreen';
+  static const memoryGameSolve = '/memoryGameSolve';
+  static const memoryGridScreen = '/memoryGridScreen';
+  static const storyListScreen = '/storyListScreen';
+  static const storyOptionGridScreen = '/storyOptionGridScreen';
 }

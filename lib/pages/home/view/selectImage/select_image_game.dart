@@ -173,7 +173,9 @@ _bodyWidget(SelectImageController controller) {
                         child: CustomSimpleTextField(
                           textAlign: TextAlign.center,
                           hintText: 'Choose the correct '
-                              '${controller.getRoleId == '1' ? 'Birds' : controller.getRoleId == '2' ? 'Hindi Words' : controller.getRoleId == '3' ? 'Fruit' : 'Animal'}:',
+                              '${controller.getRoleId == '1' ? 'Birds' :
+                          controller.getRoleId == '2' ? 'Hindi Words' :
+                          controller.getRoleId == '3' ? 'Fruit' : 'Animal'}:',
                           fontfamily: 'summary',
                           textSize:
                               MediaQuery.of(Get.context!).size.height * 0.03,
@@ -269,7 +271,8 @@ _bodyWidget(SelectImageController controller) {
                                 padding: const EdgeInsets.only(top: 5.0),
                                 child: CustomSimpleTextField(
                                   hintText:
-                                      ' ${controller.getRoleId == '1' ? currentAnimal3![0].toUpperCase() + currentAnimal3!.substring(1).toLowerCase() : controller.getRoleId == '2' ? currentAnimal2![0].toUpperCase() + currentAnimal2!.substring(1).toLowerCase() : controller.getRoleId == '3' ? currentAnimal1![0].toUpperCase() + currentAnimal1!.substring(1).toLowerCase() : currentAnimal![0].toUpperCase() + currentAnimal!.substring(1).toLowerCase()} ',
+                                      ' ${controller.getRoleId == '1' ?
+                                      currentAnimal3![0].toUpperCase() + currentAnimal3!.substring(1).toLowerCase() : controller.getRoleId == '2' ? currentAnimal2![0].toUpperCase() + currentAnimal2!.substring(1).toLowerCase() : controller.getRoleId == '3' ? currentAnimal1![0].toUpperCase() + currentAnimal1!.substring(1).toLowerCase() : currentAnimal![0].toUpperCase() + currentAnimal!.substring(1).toLowerCase()} ',
                                   fontfamily: 'summary',
                                   textSize: 40,
                                   hintColor: appColor,
@@ -348,7 +351,7 @@ showDialogBox(SelectImageController controller) {
       return Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(apphow),
+          Image.asset(apphow,height:  MediaQuery.of(context).size.width * 0.9),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -383,10 +386,12 @@ showDialogBox(SelectImageController controller) {
                     children: [
                       Image.asset(
                         appbtn,
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.5,
                       ),
                       Center(
                         child: CustomSimpleTextField(
+                          textSizeValue: true,
+                          underLineValue: false,
                           textAlign: TextAlign.center,
                           hintText: 'OKAY!!',
                           textSize:

@@ -178,7 +178,7 @@ class NewNumberPuzzleSlideSolveScreen
         return Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset(apphow),
+            Image.asset(apphow,height:  MediaQuery.of(context).size.width * 0.9,),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -211,10 +211,12 @@ class NewNumberPuzzleSlideSolveScreen
                       children: [
                         Image.asset(
                           appbtn,
-                          width: MediaQuery.of(context).size.width * 0.6,
+                          width: MediaQuery.of(context).size.width * 0.5,
                         ),
                         Center(
                           child: CustomSimpleTextField(
+                            textSizeValue: true,
+                            underLineValue: false ,
                             textAlign: TextAlign.center,
                             hintText: 'OKAY!!',
                             textSize:

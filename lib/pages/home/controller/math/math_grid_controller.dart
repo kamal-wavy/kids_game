@@ -13,7 +13,9 @@ class MathGridController extends GetxController {
 
   String text = "";
   int index = 0;
-  final String fullText = '''Hi, let's play with\nsome quick calculations!''';
+  final String fullText = '''Let's play with\nsome quick calculations!''';
+  bool isNumberPuzzleRobotShown = false;
+  final box = GetStorage();
 
 
   void startTyping() {
@@ -34,6 +36,8 @@ class MathGridController extends GetxController {
   void onInit() {
     AvtarName = userData.read(userName);
     startTyping();
+    box.initStorage;
+    isNumberPuzzleRobotShown = box.read('isMathGameRobotShown') ?? false;
     super.onInit();
   }
 

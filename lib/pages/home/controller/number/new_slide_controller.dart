@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../color.dart';
 import '../../../../custom/simpleText.dart';
+import '../../../../custom/take_screenshot.dart';
 import '../../../../image.dart';
 import '../../../../string.dart';
 import '../../view/number/number_puzzle_list_screen.dart';
@@ -43,12 +44,21 @@ class NewNumberPuzzleSlideSolveController extends GetxController
   double initialY = 0.0;
   AnimationController? animationControllerBlast;
   int start = 0;
-  void playAnimation() {
 
+  final AudioPlayer audioPlayerBlast = AudioPlayer();
+  String audioPathbBlast = 'audio/four.mp3';
+
+  void playAnimation() async {
     animationControllerBlast!.forward(from: 0.0);
+    await audioPlayerBlast.play(AssetSource(audioPathbBlast));
 
+    print('Audio playing  blast 1414');
   }
 
+  void takeScreenshotMethod() {
+    final screnCpntroller = Get.put(ScreenshotController());
+    screnCpntroller.takeScreenshotAndShare();
+  }
 
   @override
   void onInit() {
@@ -71,6 +81,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       duration: Duration(seconds: 10), // Adjust the duration as needed
     );
   }
+
   void startGame() {
     secondsElapsed = 0;
 
@@ -134,7 +145,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(appPause),
+              Image.asset(appPause,height:  MediaQuery.of(context).size.width * 0.9),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -146,7 +157,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
                       child: CustomSimpleTextField(
                         textAlign: TextAlign.center,
                         hintText: txtGameDonotResume,
-                        textSize: 28,
+                        textSize:  MediaQuery.of(context).size.width * 0.060,
                         hintColor: blackColor,
                         fontfamily: 'summary',
                       ),
@@ -165,13 +176,15 @@ class NewNumberPuzzleSlideSolveController extends GetxController
                           children: [
                             Image.asset(
                               appbtn,
-                              width: MediaQuery.of(context).size.width * 0.6,
+                              width: MediaQuery.of(context).size.width * 0.5,
                             ),
                             Center(
                               child: CustomSimpleTextField(
+                                underLineValue: false,
+                                textSizeValue: true,
                                 textAlign: TextAlign.center,
                                 hintText: txtResume,
-                                textSize: 32,
+                                textSize:  MediaQuery.of(context).size.width * 0.060,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -186,7 +199,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize: MediaQuery.of(context).size.width * 0.070,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
@@ -199,8 +212,6 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       },
     );
   }
-
-
 
   void moveNumber(int index, String direction) {
     if (animateController.isAnimating) {
@@ -277,11 +288,10 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       });
       startAnimation();
       submitUser();
-      start=1;
+      start = 1;
       playAnimation();
       dh();
       update();
-
     }
   }
 
@@ -346,14 +356,35 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       startAnimation();
       submitUser();
 
-      start=1;
+      start = 1;
       playAnimation();
       dh();
       update();
     }
   }
 
+  String formatSeconds(int seconds) {
+    int hours = seconds ~/ 3600;
+    int remainingSeconds = seconds % 3600;
+    int minutes = remainingSeconds ~/ 60;
+    int remainingSecondsFinal = remainingSeconds % 60;
+
+    String formattedTime = '';
+
+    if (hours > 0) {
+      formattedTime += '${hours.toString().padLeft(2, '0')}:';
+    }
+
+    formattedTime += '${minutes.toString().padLeft(2, '0')}:';
+    formattedTime += '${remainingSecondsFinal.toString().padLeft(2, '0')}';
+
+    return formattedTime;
+  }
+
+  String? formattedTime;
+
   dh() {
+    formattedTime = formatSeconds(secondsElapsed);
     blastController.play();
     return showDialog(
       context: Get.context!,
@@ -378,23 +409,40 @@ class NewNumberPuzzleSlideSolveController extends GetxController
                       Flexible(
                         child: CustomSimpleTextField(
                           hintText: txtGameOver,
-                          textSize: 35,
+                          textSize:  MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.04,
                           hintColor: appRedColor,
                           fontfamily: 'summary',
                         ),
                       ),
                       Flexible(
                         child: CustomSimpleTextField(
+                          underLineValue: false,
+                          textSizeValue: true,
                           hintText: 'Moves: ${moves.toString() ?? ""}',
-                          textSize: 20,
+                          textSize:  MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.025,
                           hintColor: appColor,
                           fontfamily: 'Montstreat',
                         ),
                       ),
                       Flexible(
                         child: CustomSimpleTextField(
-                          hintText: '$txtGameTime $secondsElapsed seconds',
-                          textSize: 20,
+                          underLineValue: false,
+                          textSizeValue: true,
+                          // hintText: '$txtGameTime $formattedTime',
+                          hintText:'$txtGameTime ${formatTime(secondsElapsed)}',
+                          textSize:  MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.025,
                           hintColor: appColor,
                           fontfamily: 'Montstreat',
                         ),
@@ -407,8 +455,43 @@ class NewNumberPuzzleSlideSolveController extends GetxController
                             blastController.stop();
                             Get.offAll(NumberPuzzleListScreen());
                           },
-                          child: Image.asset(appFinish),
+                          child: Image.asset(appFinish, height:  MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.05,),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.pink,
+                            ),
+                          ),
+                          Flexible(
+                            child: GestureDetector(
+                              onTap: () {
+                                takeScreenshotMethod();
+                              },
+                              child: CustomSimpleTextField(
+                                underLineValue: false,
+                                textSizeValue: true,
+                                hintText: 'Share With Friends',
+                                textSize:  MediaQuery.of(Get.context!)
+                                    .size
+                                    .height
+                                    .toInt() *
+                                    0.020,
+                                hintColor: appColor,
+                                fontfamily: 'Montstreat',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -463,7 +546,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -506,7 +589,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -550,7 +633,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -593,7 +676,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -636,7 +719,7 @@ class NewNumberPuzzleSlideSolveController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [

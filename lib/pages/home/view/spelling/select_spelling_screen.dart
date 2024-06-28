@@ -1,4 +1,3 @@
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -21,7 +20,6 @@ class SelectSpellingScreen extends GetView<SelectSpellingController> {
       child: GetBuilder<SelectSpellingController>(
           init: SelectSpellingController(),
           builder: (context) {
-
             return WillPopScope(
                 onWillPop: () async {
                   return false;
@@ -125,13 +123,6 @@ _bodyWidget(SelectSpellingController controller) {
                 ),
               ),
             ),
-            // ConfettiWidget(
-            //   confettiController: controller.blastController,
-            //   shouldLoop: true,
-            //   blastDirectionality: BlastDirectionality.explosive,
-            //   maxBlastForce: 100,
-            //   numberOfParticles: 50,
-            // ),
             Expanded(
               flex: 9,
               child: Padding(
@@ -141,17 +132,20 @@ _bodyWidget(SelectSpellingController controller) {
           ],
         ),
       ),
-      controller.start==1?
-      Lottie.asset(
-        fit: BoxFit.fitHeight,
+      controller.start == 1
+          ? Lottie.asset(
+              fit: BoxFit.fill,
 //repeat: true,
-        'assets/s.json',
-        // animate: true,
-        controller: controller.animationControllerBlast, // Use animationController here
-        onLoaded: (composition) {
-          controller.animationControllerBlast!.duration = composition.duration;
-        },
-      ):Text('')
+              'assets/s.json',
+              // animate: true,
+              controller: controller.animationControllerBlast,
+              // Use animationController here
+              onLoaded: (composition) {
+                controller.animationControllerBlast!.duration =
+                    composition.duration;
+              },
+            )
+          : Text('')
     ],
   );
 }
@@ -194,7 +188,7 @@ completeBody(SelectSpellingController controller) {
         case 'cabbage':
           controller.image = Image.asset(appcabbage);
           break;
-        case 'brocoli':
+        case 'broccoli':
           controller.image = Image.asset(appbrocoli);
           break;
         case 'spinach':
@@ -289,7 +283,7 @@ completeBody(SelectSpellingController controller) {
       // mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         CircleAvatar(
-          radius: 80,
+          radius: MediaQuery.of(Get.context!).size.height * 0.07,
           backgroundColor: backgroundColor,
           child: controller.image,
         ),
@@ -358,7 +352,8 @@ List<Widget> buildBoxes(
                           textSizeValue: true,
                           hintText: part,
                           fontfamily: 'Montstreat',
-                          textSize: 25,
+                          textSize:
+                              MediaQuery.of(Get.context!).size.height * 0.03,
                           hintColor: Colors.white,
                         ),
                       ),
@@ -381,7 +376,7 @@ showDialogBox(SelectSpellingController controller) {
       return Stack(
         alignment: Alignment.center,
         children: [
-          Image.asset(apphow),
+          Image.asset(apphow, height: MediaQuery.of(context).size.width * 0.9),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -413,10 +408,12 @@ showDialogBox(SelectSpellingController controller) {
                     children: [
                       Image.asset(
                         appbtn,
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.5,
                       ),
                       Center(
                         child: CustomSimpleTextField(
+                          textSizeValue: true,
+                          underLineValue: false,
                           textAlign: TextAlign.center,
                           hintText: 'OKAY!!',
                           textSize:

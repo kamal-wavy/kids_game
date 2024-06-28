@@ -1,13 +1,14 @@
 import 'dart:async';
 
+import 'package:KidsPlan/pages/home/controller/tictoe/select_tictoe_avtar_controller.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:KidsPlan/pages/home/controller/tictoe/select_tictoe_avtar_controller.dart';
 
 import '../../../../color.dart';
 import '../../../../custom/simpleText.dart';
+import '../../../../custom/take_screenshot.dart';
 import '../../../../image.dart';
 import '../../../../sqlite_data/sqlite_data_store.dart';
 import '../../../../string.dart';
@@ -20,8 +21,8 @@ class PlayTicToeController extends GetxController
   String? getRoleId;
   int? giveResult;
   final AudioPlayer audioPlayer = AudioPlayer();
-bool isbBlast = false;
-final blastController = ConfettiController();
+  bool isbBlast = false;
+  final blastController = ConfettiController();
   final DBStudentManager dbStudentManager = new DBStudentManager();
   final _nameController = TextEditingController();
   final _courseController = TextEditingController();
@@ -50,11 +51,22 @@ final blastController = ConfettiController();
   int nextMatchName = 0;
   AnimationController? animationControllerBlast;
   int start = 0;
-  void playAnimation() {
 
+  final AudioPlayer audioPlayerBlast = AudioPlayer();
+  String audioPathbBlast = 'audio/four.mp3';
+
+  void playAnimation() async {
     animationControllerBlast!.forward(from: 0.0);
+    await audioPlayerBlast.play(AssetSource(audioPathbBlast));
 
+    print('Audio playing  blast 1414');
   }
+
+  void takeScreenshotMethod() {
+    final screnCpntroller = Get.put(ScreenshotController());
+    screnCpntroller.takeScreenshotAndShare();
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -65,7 +77,6 @@ final blastController = ConfettiController();
       duration: Duration(seconds: 10), // Adjust the duration as needed
     );
   }
-
 
   void playAudio() async {
     try {
@@ -166,7 +177,8 @@ final blastController = ConfettiController();
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(appPause),
+              Image.asset(appPause,
+                  height: MediaQuery.of(context).size.width * 0.9),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -175,7 +187,7 @@ final blastController = ConfettiController();
                     child: CustomSimpleTextField(
                       textAlign: TextAlign.center,
                       hintText: txtGameDonotResume,
-                      textSize: 28,
+                      textSize: MediaQuery.of(context).size.width * 0.060,
                       hintColor: blackColor,
                       fontfamily: 'summary',
                     ),
@@ -191,12 +203,16 @@ final blastController = ConfettiController();
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            Image.asset(appbtn),
+                            Image.asset(appbtn,
+                                width: MediaQuery.of(context).size.width * 0.5),
                             Center(
                               child: CustomSimpleTextField(
+                                textSizeValue: true,
+                                underLineValue: false,
                                 textAlign: TextAlign.center,
                                 hintText: txtResume,
-                                textSize: 32,
+                                textSize:
+                                    MediaQuery.of(context).size.width * 0.060,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -211,7 +227,7 @@ final blastController = ConfettiController();
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize: MediaQuery.of(context).size.width * 0.070,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
@@ -379,7 +395,7 @@ final blastController = ConfettiController();
               GestureDetector(
                 onTap: () {
                   resetGame();
-                  nextMatchName =1;
+                  nextMatchName = 1;
                   update();
                 },
                 child: Stack(
@@ -426,7 +442,7 @@ final blastController = ConfettiController();
           hintText: winner == 'draw'
               ? 'It\'s a draw!'
               : 'Player ${winner == 'X' ? selectedItem?.text ?? "" : selectedItem1?.text ?? ""} wins!',
-          textSize: 35,
+          textSize: MediaQuery.of(Get.context!).size.height * 0.035,
           hintColor: appColor,
           fontfamily: 'summary',
         ),
@@ -525,7 +541,7 @@ final blastController = ConfettiController();
 
   showCongratulationsPopup() {
     // blastController.play();
-    start=1;
+    start = 1;
     playAnimation();
 
     update();
@@ -552,7 +568,10 @@ final blastController = ConfettiController();
                       hintText:
                           // 'Player ${winner == '0' ? selectedItem?.text ?? "" : selectedItem1?.text ?? ""} wins the game!',
                           'Player ${winnerName ?? ""} wins the game!',
-                      textSize: 28,
+                      textSize:
+                          MediaQuery.of(Get.context!).size.height.toInt() *
+                              0.03,
+                      //28,
                       hintColor: blackColor,
                       fontfamily: 'summary',
                     ),
@@ -566,8 +585,8 @@ final blastController = ConfettiController();
                           player2Wins = 0;
                           totalDraws = 0;
                           secondsElapsed = 0;
-                          nextMatchName =1;
-                       start =0;
+                          nextMatchName = 1;
+                          start = 0;
                           blastController.stop();
                           update();
                           Get.back();
@@ -576,11 +595,24 @@ final blastController = ConfettiController();
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            Image.asset(appbtn),
+                            Image.asset(
+                              appbtn,
+                              height: MediaQuery.of(Get.context!)
+                                      .size
+                                      .height
+                                      .toInt() *
+                                  0.05,
+                            ),
                             Center(
                               child: CustomSimpleTextField(
+                                textSizeValue: true,
+                                underLineValue: false,
                                 hintText: txtRestartGame,
-                                textSize: 32,
+                                textSize: MediaQuery.of(Get.context!)
+                                        .size
+                                        .height
+                                        .toInt() *
+                                    0.03,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -595,11 +627,45 @@ final blastController = ConfettiController();
                       Get.offAll(TicToeSelectAvtarScreen());
                     },
                     child: CustomSimpleTextField(
+                      textSizeValue: true,
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize:
+                          MediaQuery.of(Get.context!).size.height.toInt() *
+                              0.03,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.share,
+                          color: Colors.pink,
+                        ),
+                      ),
+                      Flexible(
+                        child: GestureDetector(
+                          onTap: () {
+                            takeScreenshotMethod();
+                          },
+                          child: CustomSimpleTextField(
+                            underLineValue: false,
+                            textSizeValue: true,
+                            hintText: 'Share With Friends',
+                            textSize: MediaQuery.of(Get.context!)
+                                    .size
+                                    .height
+                                    .toInt() *
+                                0.020,
+                            hintColor: appColor,
+                            fontfamily: 'Montstreat',
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               )
@@ -633,7 +699,9 @@ final blastController = ConfettiController();
                       child: CustomSimpleTextField(
                         textAlign: TextAlign.center,
                         hintText: 'The series is drawn.',
-                        textSize: 28,
+                        textSize:
+                            MediaQuery.of(Get.context!).size.height.toInt() *
+                                0.03,
                         hintColor: blackColor,
                         fontfamily: 'summary',
                       ),
@@ -657,11 +725,17 @@ final blastController = ConfettiController();
                           alignment: Alignment.center,
                           children: [
                             Image.asset(appbtn,
-                                width: MediaQuery.of(context).size.width * 0.6),
+                                width: MediaQuery.of(context).size.width * 0.5),
                             Center(
                               child: CustomSimpleTextField(
+                                textSizeValue: true,
+                                underLineValue: false,
                                 hintText: txtRestartGame,
-                                textSize: 32,
+                                textSize: MediaQuery.of(Get.context!)
+                                        .size
+                                        .height
+                                        .toInt() *
+                                    0.03,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -676,7 +750,9 @@ final blastController = ConfettiController();
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize:
+                          MediaQuery.of(Get.context!).size.height.toInt() *
+                              0.03,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),

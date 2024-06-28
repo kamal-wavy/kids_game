@@ -13,7 +13,9 @@ class PairGridController extends GetxController {
 
   String text = "";
   int index = 0;
-  final String fullText = "Hi,sharpen your matching\nskills with directions!";
+  final String fullText = "Sharpen your matching\nskills with directions!";
+  bool isNumberPuzzleRobotShown = false;
+  final box = GetStorage();
 
   void startTyping() {
     const duration = const Duration(milliseconds: 100);
@@ -33,6 +35,8 @@ class PairGridController extends GetxController {
   void onInit() {
     AvtarName = userData.read(userName);
     startTyping();
+    box.initStorage;
+    isNumberPuzzleRobotShown = box.read('isPairGameRobotShown') ?? false;
     super.onInit();
   }
 

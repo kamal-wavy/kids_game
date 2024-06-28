@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
+
+import '../../../../color.dart';
+import '../../../../custom/simpleText.dart';
 
 class NumberPuzzleListController extends GetxController {
   @override
@@ -14,7 +19,9 @@ class NumberPuzzleListController extends GetxController {
   List<String> containerList = ['1', '2', '3'];
   String text = "";
   int index = 0;
-  final String fullText = "Hi, tackle these quick\npuzzles!";
+  final String fullText = "Tackle these quick\npuzzles!";
+   bool isNumberPuzzleRobotShown = false;
+  final box = GetStorage();
 
   void startTyping() {
     const duration = const Duration(milliseconds: 100);
@@ -31,10 +38,14 @@ class NumberPuzzleListController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit()async {
     super.onInit();
     getData();
     startTyping();
+    box.initStorage;
+    isNumberPuzzleRobotShown = box.read('isNumberPuzzleRobotShown') ?? false;
+    // showRobot();
+
   }
 
   void playAudio() async {
@@ -55,6 +66,7 @@ class NumberPuzzleListController extends GetxController {
       }
     }
   }
+
 
   @override
   void dispose() {

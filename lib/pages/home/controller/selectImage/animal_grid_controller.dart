@@ -13,8 +13,9 @@ class AnimalGridController extends GetxController {
 
   String text = "";
   int index = 0;
-  final String fullText = "Hi,explore and discover\nthe correct one!";
-
+  final String fullText = "Explore and discover\nthe correct one!";
+  bool isNumberPuzzleRobotShown = false;
+  final box = GetStorage();
   void startTyping() {
     const duration = const Duration(milliseconds: 100);
 
@@ -35,6 +36,8 @@ class AnimalGridController extends GetxController {
   void onInit() {
     AvtarName = userData.read(userName);
     startTyping();
+    box.initStorage;
+    isNumberPuzzleRobotShown = box.read('isSelectImageRobotShown') ?? false;
     super.onInit();
   }
 

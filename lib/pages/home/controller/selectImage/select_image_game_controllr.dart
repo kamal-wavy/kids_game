@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../../color.dart';
 import '../../../../custom/simpleText.dart';
+import '../../../../custom/take_screenshot.dart';
 import '../../../../image.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../../string.dart';
@@ -21,16 +22,30 @@ class SelectImageController extends GetxController
 
   // String audioPath = 'audio/ping.mp3';
   String audioPath = 'audio/click.mp3';
+
   AnimationController? animationControllerBlast;
   int start = 0;
-  void playAnimation() {
 
+  final AudioPlayer audioPlayerBlast = AudioPlayer();
+
+  String audioPathbBlast = 'audio/four.mp3';
+
+  void playAnimation() async {
     animationControllerBlast!.forward(from: 0.0);
+    await audioPlayerBlast.play(AssetSource(audioPathbBlast));
 
+    print('Audio playing  blast 1414');
   }
+
+  void takeScreenshotMethod() {
+    final screnCpntroller = Get.put(ScreenshotController());
+    screnCpntroller.takeScreenshotAndShare();
+  }
+
   @override
   void onInit() {
     super.onInit();
+    shuffleStoreList();
     getData();
     startGame();
     animationControllerBlast = AnimationController(
@@ -58,14 +73,29 @@ class SelectImageController extends GetxController
     }
   }
 
+  void shuffleStoreList() {
+    birdsImageSets.shuffle();
+    hindiImageSets.shuffle();
+    fruitImageSets.shuffle();
+    animalImageSets.shuffle();
+  }
+
   List<Map<String, List<String>>> animalImageSets = [
+    {
+      'animalName': ['gorilla'],
+      'imageSet': ['snake.png', 'gorilla.png', 'rat.png'],
+    },
     {
       'animalName': ['bear'],
       'imageSet': ['bear.png', 'cow.png', 'buffalo.png'],
     },
     {
-      'animalName': ['dear'],
-      'imageSet': ['dog.png', 'dear.png', 'elephant.png'],
+      'animalName': ['deer'],
+      'imageSet': ['dog.png', 'deer.png', 'elephant.png'],
+    },
+    {
+      'animalName': ['snake'],
+      'imageSet': ['snake.png', 'gorilla.png', 'deer.png'],
     },
     {
       'animalName': ['rat'],
@@ -76,28 +106,48 @@ class SelectImageController extends GetxController
       'imageSet': ['horse.png', 'lion.png', 'zebra.png'],
     },
     {
+      'animalName': ['panda'],
+      'imageSet': ['snake.png', 'panda.png', 'turtle.png'],
+    },
+    {
       'animalName': ['cow'],
-      'imageSet': ['buffalo.png', 'cow.png', 'dear.png'],
+      'imageSet': ['buffalo.png', 'cow.png', 'deer.png'],
     },
     {
       'animalName': ['dog'],
       'imageSet': ['dog.png', 'elephant.png', 'rat.png'],
     },
     {
+      'animalName': ['camel'],
+      'imageSet': ['camel.png', 'buffalo.png', 'cow.png'],
+    },
+    {
       'animalName': ['turtle'],
       'imageSet': ['lion.png', 'turtle.png', 'horse.png'],
     },
     {
-      'animalName': ['buffalo'],
-      'imageSet': ['dog.png', 'dear.png', 'buffalo.png'],
+      'animalName': ['chipmunk'],
+      'imageSet': ['goat.png', 'chipmunk.png', 'panda.png'],
     },
     {
-      'animalName': ['zebra'],
-      'imageSet': ['cow.png', 'zebra.png', 'elephant.png'],
+      'animalName': ['buffalo'],
+      'imageSet': ['dog.png', 'deer.png', 'buffalo.png'],
+    },
+    {
+      'animalName': ['goat'],
+      'imageSet': ['camel.png', 'seal.png', 'goat.png'],
+    },
+    {
+      'animalName': ['seal'],
+      'imageSet': ['lion.png', 'dog.png', 'seal.png'],
+    },
+    {
+      'animalName': ['goat'],
+      'imageSet': ['camel.png', 'seal.png', 'goat.png'],
     },
     {
       'animalName': ['horse'],
-      'imageSet': ['elephant.png', 'horse.png', 'dear.png'],
+      'imageSet': ['elephant.png', 'horse.png', 'deer.png'],
     },
     // Add more animals and their image sets as needed.
   ];
@@ -150,12 +200,24 @@ class SelectImageController extends GetxController
       'imageSet': ['grapes.png', 'banana.png', 'apple.png'],
     },
     {
+      'animalName': ['avocado'],
+      'imageSet': ['strawberry.png', 'avocado.png', 'grapes.png'],
+    },
+    {
       'animalName': ['guava'],
       'imageSet': ['kiwi.png', 'guava.png', 'mango.png'],
     },
     {
       'animalName': ['orange'],
       'imageSet': ['banana.png', 'strawberry.png', 'orange.png'],
+    },
+    {
+      'animalName': ['coconut'],
+      'imageSet': ['kiwi.png', 'banana.png', 'coconut.png'],
+    },
+    {
+      'animalName': ['dates'],
+      'imageSet': ['dates.png', 'watermelon.png', 'grapes.png'],
     },
     {
       'animalName': ['watermelon'],
@@ -166,6 +228,10 @@ class SelectImageController extends GetxController
       'imageSet': ['banana.png', 'guava.png', 'orange.png'],
     },
     {
+      'animalName': ['pumpkin'],
+      'imageSet': ['dates.png', 'cherry.png', 'pumpkin.png'],
+    },
+    {
       'animalName': ['kiwi'],
       'imageSet': ['kiwi.png', 'mango.png', 'strawberry.png'],
     },
@@ -174,8 +240,20 @@ class SelectImageController extends GetxController
       'imageSet': ['banana.png', 'grapes.png', 'watermelon.png'],
     },
     {
+      'animalName': ['lemon'],
+      'imageSet': ['lemon.png', 'mango.png', 'pumpkin.png'],
+    },
+    {
       'animalName': ['cherry'],
       'imageSet': ['strawberry.png', 'cherry.png', 'guava.png'],
+    },
+    {
+      'animalName': ['sugarcane'],
+      'imageSet': ['coconut.png', 'mango.png', 'sugarcane.png'],
+    },
+    {
+      'animalName': ['pomegranate'],
+      'imageSet': ['dates.png', 'pomegranate.png', 'pumpkin.png'],
     },
     {
       'animalName': ['mango'],
@@ -189,12 +267,24 @@ class SelectImageController extends GetxController
   ];
   List<Map<String, List<String>>> birdsImageSets = [
     {
+      'animalName': ['macaw'],
+      'imageSet': ['macaw.png', 'pelican.png', 'robin.png'],
+    },
+    {
       'animalName': ['parrot'],
       'imageSet': ['hawk.png', 'parrot.png', 'ostrich.png'],
     },
     {
+      'animalName': ['robin'],
+      'imageSet': ['kiwi.png', 'robin.png', 'toucan.png'],
+    },
+    {
       'animalName': ['owl'],
       'imageSet': ['duck.png', 'owl.png', 'hen.png'],
+    },
+    {
+      'animalName': ['kingfisher'],
+      'imageSet': ['macaw.png', 'pelican.png', 'kingfisher.png'],
     },
     {
       'animalName': ['sparrow'],
@@ -205,8 +295,20 @@ class SelectImageController extends GetxController
       'imageSet': ['parrot.png', 'crane.png', 'hen.png'],
     },
     {
+      'animalName': ['pelican'],
+      'imageSet': ['vulture.png', 'pelican.png', 'ostrich.png'],
+    },
+    {
+      'animalName': ['vulture'],
+      'imageSet': ['vulture.png', 'kiwi.png', 'kingfisher.png'],
+    },
+    {
       'animalName': ['hummingbird'],
       'imageSet': ['hummingbird.png', 'owl.png', 'duck.png'],
+    },
+    {
+      'animalName': ['kiwi'],
+      'imageSet': ['crane.png', 'kiwi.png', 'hawk1.png'],
     },
     {
       'animalName': ['peacock'],
@@ -219,6 +321,10 @@ class SelectImageController extends GetxController
     {
       'animalName': ['pigeon'],
       'imageSet': ['crane.png', 'pigeon.png', 'owl.png'],
+    },
+    {
+      'animalName': ['toucan'],
+      'imageSet': ['kiwi.png', 'robin.png', 'toucan.png'],
     },
     {
       'animalName': ['crow'],
@@ -395,7 +501,8 @@ class SelectImageController extends GetxController
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(appPause),
+              Image.asset(appPause,
+                  height: MediaQuery.of(context).size.width * 0.9),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -406,7 +513,7 @@ class SelectImageController extends GetxController
                       child: CustomSimpleTextField(
                         textAlign: TextAlign.center,
                         hintText: txtGameDonotResume,
-                        textSize: 28,
+                        textSize: MediaQuery.of(context).size.width * 0.060,
                         hintColor: blackColor,
                         fontfamily: 'summary',
                       ),
@@ -424,12 +531,15 @@ class SelectImageController extends GetxController
                           alignment: Alignment.center,
                           children: [
                             Image.asset(appbtn,
-                                width: MediaQuery.of(context).size.width * 0.6),
+                                width: MediaQuery.of(context).size.width * 0.5),
                             Center(
                               child: CustomSimpleTextField(
+                                textSizeValue: true,
+                                underLineValue: false,
                                 textAlign: TextAlign.center,
                                 hintText: txtResume,
-                                textSize: 32,
+                                textSize:
+                                    MediaQuery.of(context).size.width * 0.060,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -445,7 +555,7 @@ class SelectImageController extends GetxController
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize: MediaQuery.of(context).size.width * 0.070,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
@@ -482,7 +592,8 @@ class SelectImageController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
+          //50,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -525,7 +636,7 @@ class SelectImageController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -569,7 +680,7 @@ class SelectImageController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -612,7 +723,7 @@ class SelectImageController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -655,7 +766,7 @@ class SelectImageController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height: MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -733,7 +844,7 @@ class SelectImageController extends GetxController
 
         _startAnimation();
 
-        start=1;
+        start = 1;
         playAnimation();
         dh();
         update();
@@ -801,15 +912,22 @@ class SelectImageController extends GetxController
                       Flexible(
                         child: CustomSimpleTextField(
                           hintText: txtGameOver,
-                          textSize: 35,
+                          textSize:
+                              //  35
+                              MediaQuery.of(Get.context!).size.height.toInt() *
+                                  0.04,
                           hintColor: appRedColor,
                           fontfamily: 'summary',
                         ),
                       ),
                       Flexible(
                         child: CustomSimpleTextField(
-                          hintText: '$txtGameTime $secondsElapsed seconds',
-                          textSize: 20,
+                          hintText:
+                              '$txtGameTime ${formatTime(secondsElapsed)}',
+                          textSize:
+                              MediaQuery.of(Get.context!).size.height.toInt() *
+                                  0.025,
+                          //20,
                           hintColor: appColor,
                           fontfamily: 'Montstreat',
                         ),
@@ -822,8 +940,49 @@ class SelectImageController extends GetxController
                             blastController.stop();
                             Get.offAll(AnimalGridScreen());
                           },
-                          child: Image.asset(appFinish),
+                          child: Image.asset(
+                            appFinish,
+                            height:
+                                // 55
+                                MediaQuery.of(Get.context!)
+                                        .size
+                                        .height
+                                        .toInt() *
+                                    0.05,
+                          ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(
+                              Icons.share,
+                              color: Colors.pink,
+                            ),
+                          ),
+                          Flexible(
+                            child: GestureDetector(
+                              onTap: () {
+                                takeScreenshotMethod();
+                              },
+                              child: CustomSimpleTextField(
+                                underLineValue: false,
+                                textSizeValue: true,
+                                hintText: 'Share With Friends',
+                                textSize: MediaQuery.of(Get.context!)
+                                        .size
+                                        .height
+                                        .toInt() *
+                                    0.020,
+                                //18,
+                                hintColor: appColor,
+                                fontfamily: 'Montstreat',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

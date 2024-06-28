@@ -5,6 +5,7 @@ const appanimal = "assets/images/animal.png";
 const appcolor = "assets/images/imagePuzzle.png";
 const appnumber = "assets/images/number.png";
 const apptoe = "assets/images/toe.png";
+const appWord = "assets/images/word.png";
 const apppp = "assets/images/pp.png";
 const appImageColor = "assets/images/spl.png";
 const appPair1 = "assets/images/pair1.png";
@@ -21,12 +22,19 @@ const appPopup = "assets/images/popup.png";
 const appFinish = "assets/images/finish.png";
 const appDraw = "assets/images/draw.png";
 const appBgMusic = "assets/images/bgMusic.png";
+const appBgRating = "assets/images/rate.png";
+const appB1 = "assets/images/b1.png";
+const appB2 = "assets/images/b2.png";
 
 const appStar1 = "assets/images/Star1.png";
 const appStarRight1 = "assets/images/StarRight1.png";
 const appStarRight2 = "assets/images/StarRight2.png";
 const appStarLeft1 = "assets/images/Starleft1.png";
 const appStarLeft2 = "assets/images/Starleft2.png";
+
+const appNum = "assets/animal/num.png";
+const appMemBear = "assets/animal/memBear.png";
+const appP = "assets/pair/p.png";
 
 const appGAnimal = "assets/images/GAnimal.png";
 const appGBird = "assets/images/GBird.png";
@@ -60,7 +68,7 @@ const apptomato = "assets/food/tomato.png";
 const appcarrot = "assets/food/carrot.png";
 const apponion = "assets/food/onion.png";
 const appbrinjal = "assets/food/brinjal.png";
-const appbrocoli = "assets/food/brocoli.png";
+const appbrocoli = "assets/food/broccoli.png";
 
 const appear = "assets/body/ear.png";
 const appeye = "assets/body/eye.png";
@@ -77,6 +85,8 @@ const appneck = "assets/body/neck.png";
 const appNumberBox = "assets/numberBox.png";
 const appNumbernot = "assets/numbernot.png";
 const appShuffle = "assets/shuffle.png";
+const appSkipbtn = "assets/skipbtn.png";
+const appRstbtn = "assets/rst.png";
 
 const appMathbtn = "assets/images/mathbtn.png";
 const appPlaybtn = "assets/images/playbtn.png";
@@ -123,4 +133,84 @@ const appg3 = "assets/images/g3.png";
 const appg4 = "assets/images/g4.png";
 const appg5 = "assets/images/g5.png";
 const appg6 = "assets/images/g6.png";
+const appg9 = "assets/images/g9.png";
 const appEdit = "assets/images/edit.png";
+
+const appSnowball = "assets/story/snowball.png";
+const appCroco = "assets/story/crco.png";
+const appLandscape = "assets/story/landscape.png";
+const appChildren = "assets/story/children.png";
+const appRabbit = "assets/story/rabbit.png";
+
+const appKid = "assets/story/kid.png";
+const appLamb = "assets/story/lamb.png";
+const appSheep = "assets/story/sheep.png";
+const appTea = "assets/story/tea.png";
+
+const appAnimal = "assets/story/animal.png";
+const appLog = "assets/story/log.png";
+const appIce = "assets/story/ice.png";
+const appDaffodil = "assets/story/daffodil.png";
+
+const appGolden = "assets/story/golden.png";
+const appCrow = "assets/story/crow.png";
+const appWolf = "assets/story/wolf.png";
+const appFox = "assets/story/fox.png";
+const appRose = "assets/story/rose.png";
+
+const appMilk = "assets/story/milk.png";
+const appOwl = "assets/story/owl.png";
+const appEgg = "assets/story/egg.png";
+const appGarden = "assets/story/garden.png";
+const appRace = "assets/story/race.png";
+const appAnt = "assets/story/ant.png";
+const appToy = "assets/story/toys.png";
+
+const appS1 = "assets/story/s1.jpg";
+const appS2 = "assets/story/s2.jpg";
+const appS3 = "assets/story/s3.jpg";
+const appS4 = "assets/story/s4.jpg";
+const appS5 = "assets/story/s5.jpg";
+const appS6 = "assets/story/s6.jpg";
+// const appS6 = "assets/story/s6.jpg";
+
+
+const appS8 = "assets/story/s8.jpg";
+const appS9 = "assets/story/s9.jpg";
+const appS10 = "assets/story/s10.jpg";
+const appS11 = "assets/story/s11.jpg";
+const appS12 = "assets/story/s12.jpg";
+const appS13 = "assets/story/s13.jpg";
+
+// Adenture Images
+const appA17 = "assets/story/a1.jpg";
+const appA18 = "assets/story/a2.jpg";
+const appA19 = "assets/story/a3.jpg";
+const appA20 = "assets/story/a4.jpg";
+
+// comedy
+
+const appC21 = "assets/story/c1.jpg";
+const appC22 = "assets/story/c2.jpg";
+const appC23 = "assets/story/c3.jpg";
+const appC24 = "assets/story/c4.jpg";
+
+
+const appN = "assets/story/n.png";
+const appT = "assets/story/t.png";
+const appF = "assets/story/f.png";
+
+const appNr = "assets/story/n.jpg";
+const appNr1 = "assets/story/n1.jpg";
+const appNr2 = "assets/story/n2.jpg";
+const appNr3 = "assets/story/n3.jpg";
+
+const appTr = "assets/story/t.jpg";
+const appTr1 = "assets/story/t1.jpg";
+const appTr2 = "assets/story/t2.jpg";
+const appTr3 = "assets/story/t3.jpg";
+
+const appFh = "assets/story/f.jpg";
+const appFh1 = "assets/story/f1.jpg";
+const appFh2 = "assets/story/f2.jpg";
+const appFh3 = "assets/story/f3.jpg";

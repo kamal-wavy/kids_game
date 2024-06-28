@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../../../color.dart';
 import '../../../../custom/simpleText.dart';
+import '../../../../custom/take_screenshot.dart';
 import '../../../../image.dart';
 import '../../../../string.dart';
 
@@ -36,14 +37,24 @@ class SelectSpellingController extends GetxController
   final blastController = ConfettiController();
   AnimationController? animationControllerBlast;
   int start = 0;
-  void playAnimation() {
-
+  final AudioPlayer audioPlayerBlast = AudioPlayer();
+  String audioPathbBlast = 'audio/four.mp3';
+  void playAnimation() async{
     animationControllerBlast!.forward(from: 0.0);
+    await audioPlayerBlast.play(AssetSource(audioPathbBlast));
 
+    print('Audio playing  blast 1414');
   }
+
+  void takeScreenshotMethod() {
+    final screnCpntroller = Get.put(ScreenshotController());
+    screnCpntroller.takeScreenshotAndShare();
+  }
+
   @override
   void onInit() {
     super.onInit();
+    shuffleStoreList();
     getData();
     startGame();
     animationControllerBlast = AnimationController(
@@ -51,7 +62,12 @@ class SelectSpellingController extends GetxController
       duration: Duration(seconds: 10), // Adjust the duration as needed
     );
   }
+  void shuffleStoreList() {
+    colorList.shuffle();
+    vegetableList.shuffle();
+    bodyPartsList.shuffle();
 
+  }
   void playAudio() async {
     try {
       await audioPlayer.play(AssetSource(audioPath));
@@ -93,7 +109,7 @@ class SelectSpellingController extends GetxController
     {'incorrect': 'Ptato,Potto', 'correct': 'Potato'},
 
     {'incorrect': 'Cbage ,Cabage', 'correct': 'Cabbage'},
-    {'incorrect': 'Broculi,Brocoly', 'correct': 'Brocoli'},
+    {'incorrect': 'Broculi,Brocoly', 'correct': 'Broccoli'},
     {'incorrect': 'Spiach,Spynach', 'correct': 'Spinach'},
     {'incorrect': 'Mushrom,Musrom', 'correct': 'Mushroom'},
     {'incorrect': 'Ment,Mnt', 'correct': 'Mint'},
@@ -102,7 +118,7 @@ class SelectSpellingController extends GetxController
   final List<Map<String, String>> bodyPartsList = [
     {'incorrect': 'Nse ,Noose', 'correct': 'Nose'},
     {'incorrect': 'Eaer,Year', 'correct': 'Ear'},
-    {'incorrect': 'Hend,Hand', 'correct': 'Hand'},
+    {'incorrect': 'Hend,Hnd', 'correct': 'Hand'},
     {'incorrect': 'Hart,Hert', 'correct': 'Heart'},
     {'incorrect': 'Ees,Eys', 'correct': 'Eye'},
 
@@ -184,7 +200,7 @@ class SelectSpellingController extends GetxController
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Image.asset(appPause),
+              Image.asset(appPause,height:  MediaQuery.of(context).size.width * 0.9),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -195,7 +211,7 @@ class SelectSpellingController extends GetxController
                       child: CustomSimpleTextField(
                         textAlign: TextAlign.center,
                         hintText: txtGameDonotResume,
-                        textSize: 28,
+                        textSize:  MediaQuery.of(context).size.width * 0.060,
                         hintColor: blackColor,
                         fontfamily: 'summary',
                       ),
@@ -205,7 +221,7 @@ class SelectSpellingController extends GetxController
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
                         onTap: () {
-                       playAudio();
+                          playAudio();
                           Get.back();
                           togglePlayPause();
                         },
@@ -213,12 +229,14 @@ class SelectSpellingController extends GetxController
                           alignment: Alignment.center,
                           children: [
                             Image.asset(appbtn,
-                                width: MediaQuery.of(context).size.width * 0.6),
+                                width: MediaQuery.of(context).size.width * 0.5),
                             Center(
                               child: CustomSimpleTextField(
+                                underLineValue: false,
+                                textSizeValue: true,
                                 textAlign: TextAlign.center,
                                 hintText: txtResume,
-                                textSize: 32,
+                                textSize: MediaQuery.of(context).size.width * 0.060,
                                 hintColor: Colors.white,
                                 fontfamily: 'summary',
                               ),
@@ -228,13 +246,13 @@ class SelectSpellingController extends GetxController
                   ),
                   GestureDetector(
                     onTap: () {
-                 playAudio();
+                      playAudio();
 
                       Get.offAll(SpellingGridScreen());
                     },
                     child: CustomSimpleTextField(
                       hintText: txtExit,
-                      textSize: 35,
+                      textSize:  MediaQuery.of(context).size.width * 0.070,
                       hintColor: appRedColor,
                       fontfamily: 'summary',
                     ),
@@ -271,7 +289,7 @@ class SelectSpellingController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -314,7 +332,7 @@ class SelectSpellingController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -358,7 +376,7 @@ class SelectSpellingController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -401,7 +419,7 @@ class SelectSpellingController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -444,7 +462,7 @@ class SelectSpellingController extends GetxController
       return Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: SizedBox(
-          height: 50,
+          height:  MediaQuery.of(Get.context!).size.height.toInt() * 0.06,
           width: MediaQuery.of(Get.context!).size.width,
           child: Stack(
             children: [
@@ -522,7 +540,7 @@ class SelectSpellingController extends GetxController
         update();
 
         _startAnimation();
-        start=1;
+        // start = 1;
         playAnimation();
         dh();
         update();
@@ -558,7 +576,7 @@ class SelectSpellingController extends GetxController
 
   dh() {
     blastController.play();
-    return showDialog(
+     showDialog(
       context: Get.context!,
       barrierDismissible: false,
       builder: (BuildContext context) {
@@ -581,15 +599,19 @@ class SelectSpellingController extends GetxController
                       Flexible(
                         child: CustomSimpleTextField(
                           hintText: txtGameOver,
-                          textSize: 35,
+                          textSize:  MediaQuery.of(Get.context!).size.height.toInt() *
+                              0.04,
                           hintColor: appRedColor,
                           fontfamily: 'summary',
                         ),
                       ),
                       Flexible(
                         child: CustomSimpleTextField(
-                          hintText: '$txtGameTime $secondsElapsed seconds',
-                          textSize: 20,
+                          hintText:
+                          '$txtGameTime ${formatTime(secondsElapsed)}',
+                          textSize:
+                          MediaQuery.of(Get.context!).size.height.toInt() *
+                              0.025,
                           hintColor: appColor,
                           fontfamily: 'Montstreat',
                         ),
@@ -602,8 +624,41 @@ class SelectSpellingController extends GetxController
                             blastController.stop();
                             Get.offAll(SpellingGridScreen());
                           },
-                          child: Image.asset(appFinish),
+                          child: Image.asset(appFinish,height:   MediaQuery.of(Get.context!)
+                              .size
+                              .height
+                              .toInt() *
+                              0.05,),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Icon(Icons.share,color: Colors.pink,),
+                          ),
+                          Flexible(
+                            child: GestureDetector(
+                              onTap: () {
+                                takeScreenshotMethod();
+                              },
+                              child: CustomSimpleTextField(
+
+                                underLineValue:false,
+                                textSizeValue: true ,
+                                hintText: 'Share With Friends',
+                                textSize:  MediaQuery.of(Get.context!)
+                                    .size
+                                    .height
+                                    .toInt() *
+                                    0.020,
+                                hintColor: appColor,
+                                fontfamily: 'Montstreat',
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -614,6 +669,8 @@ class SelectSpellingController extends GetxController
         );
       },
     );
+    start = 1;
+    update();
   }
 
   @override

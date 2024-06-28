@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../app_argument.dart';
+import '../../../dlt.dart';
 import '../../../routes/app_routes.dart';
 import '../../../test.dart';
+import '../../home/view/word/word_option_list.dart';
 
 class SplashController extends GetxController {
   bool? loginCheck;
@@ -86,10 +88,26 @@ class SplashController extends GetxController {
   }
 
   route() {
+   Get.to(CrosswordWidget());
+    // Get.to(WordOptionListScreen());
     // Get.to(Blast());
+    // Get.to(CrosswordWidget6());
+    // Get.to(CrosswordWidget5());
+    // Get.to(CrosswordWidget4());
+    //  Get.to(WordPuzzleScreen());
+    // Get.to(CrosswordWidget3());
+    // Get.to(CrosswordWidget());
+    // Get.to(GameScreen());
+    // Get.to(StoryOptionGridScreen());
+    // Get.to(StoryScreen());
+    // Get.to(MemoryGridScreen());
+    // Get.to(TesterGame2());
+    // Get.to(MemoryGameSolve());
+    // Get.to(TesterGame());
+    // Get.to(CardShuffleScreen());
     // Get.offNamed(AppRoutes.mathGridScreen);
     // Get.offNamed(AppRoutes.pairGridScreen);
-
+    // Get.offNamed(AppRoutes.pairGridScreen);
 
     userData.read(isVerifiedUser)
         ? Get.offNamed(AppRoutes.selectGameScreen)
@@ -159,7 +177,7 @@ class _BackgroundMusicObserver extends WidgetsBindingObserver {
       case AppLifecycleState.detached:
         break;
       case AppLifecycleState.hidden:
-        // TODO: Handle this case.
+      // TODO: Handle this case.
     }
   }
 }
